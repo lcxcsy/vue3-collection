@@ -1,2 +1,10 @@
 # vue3-collection
-vue3项目库，vue3+vite+ts
+
+> Vue3 项目库，Vue 3 + TypeScript + Vite。
+
+## 主要功能
+
+- router
+- vuex
+- axios
+- 样式库
