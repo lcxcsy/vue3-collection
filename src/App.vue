@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
+import { ref } from 'vue'
+import HelloWorld from './components/HelloWorld.vue'
+const hello = ref(null)
+const handleTest = (str: string): void => {
+  alert(str + `${hello.value.totalCount}`)
+}
 </script>
 
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <HelloWorld ref="hello" @test="handleTest" />
 </template>
 
 <style>

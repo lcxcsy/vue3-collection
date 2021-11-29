@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-defineProps<{ msg: string }>();
-const count = ref(0);
+import { ref, nextTick } from 'vue'
+withDefaults(defineProps<{ msg?: string }>(), {
+  msg: 'Hello Vue 3 + TypeScript + Vite'
+})
+const emit = defineEmits<{ (e: 'test', str: string): void }>()
+const count = ref(0)
+const totalCount = ref(100)
+const handleClick = function (): void {
+  emit('test', '我被点击了11111111111')
+  nextTick(() => {
+    count.value = 1
+  })
+}
+defineExpose({ totalCount })
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1 @click="handleClick()">{{ msg }}</h1>
 
   <p>
     Recommended IDE setup:

@@ -4,7 +4,7 @@
   "useTabs": false,
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "semi": true,
+  "semi": false,
   "trailingComma": "none",
   "bracketSpacing": true,
   "jsxBracketSameLine": false,
@@ -14,13 +14,7 @@
   "htmlWhitespaceSensitivity": "ignore",
   "overrides": [
     {
-      "files": [
-        "*.json",
-        ".eslintrc",
-        ".babelrc",
-        ".stylelintrc",
-        ".prettierrc"
-      ],
+      "files": ["*.json", ".eslintrc", ".babelrc", ".stylelintrc", ".prettierrc"],
       "options": {
         "parser": "json",
         "tabWidth": 2
