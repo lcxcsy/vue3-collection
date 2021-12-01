@@ -2,6 +2,10 @@ export default [
   {
     title: '欢迎',
     router: '/hello',
-    icon: 'h-icon-menu'
+    icon: 'menu'
+  }, {
+    title: '代办列表',
+    router: '/toDoList',
+    icon: 'menu'
   }
 ]

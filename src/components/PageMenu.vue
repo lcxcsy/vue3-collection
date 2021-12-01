@@ -3,7 +3,7 @@
 <template>
   <nav id="page-menu" :style="{ width: isCollapse ? foldWidth : unfoldWidth }">
     <el-scrollbar wrap-style="height: 100%" view-style="height: 100%">
-      <el-menu default-active="2" class="el-menu-vertical-demo">
+      <el-menu :default-active="defaultActiveMenu" :router="router" class="el-menu-vertical-demo">
         <el-sub-menu index="1">
           <template #title>
             <el-icon :size="20">
@@ -42,6 +42,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue-demi'
+import { useRouter, RouteRecordName } from 'vue-router'
+
 interface MenuItem {
   title: string
   router: string
@@ -62,6 +65,7 @@ interface MenuProps {
   // 是否使用 vue-router 的模式，启用该模式会在激活导航时以 index 作为 path 进行路由跳转
   router?: boolean
 }
+
 const props = withDefaults(defineProps<MenuProps>(), {
   menu: null,
   menuCollapse: true,
@@ -69,6 +73,14 @@ const props = withDefaults(defineProps<MenuProps>(), {
   foldWidth: '48px',
   unfoldWidth: '240px',
   router: true
+})
+
+// 获取激活的菜单
+const path = useRouter()
+let defaultActiveMenu = computed((): RouteRecordName | undefined | null => {
+  console.log(path.currentRoute.value.name)
+  let activeMenu = path.currentRoute.value.name
+  return '1'
 })
 
 // 定义Emit事件

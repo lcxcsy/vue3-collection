@@ -52,35 +52,6 @@ module.exports = {
 }
 ```
 
-The `.prettierrc` configuration is as follows:
-
-```js
-{
-  "printWidth": 100,
-  "tabWidth": 2,
-  "useTabs": false,
-  "singleQuote": true,
-  "jsxSingleQuote": true,
-  "semi": false,
-  "trailingComma": "none",
-  "bracketSpacing": true,
-  "jsxBracketSameLine": false,
-  "arrowParens": "avoid",
-  "proseWrap": "preserve",
-  "endOfLine": "auto",
-  "htmlWhitespaceSensitivity": "ignore",
-  "overrides": [
-    {
-      "files": ["*.json", ".eslintrc", ".babelrc", ".stylelintrc", ".prettierrc"],
-      "options": {
-        "parser": "json",
-        "tabWidth": 2
-      }
-    }
-  ]
-}
-```
-
 ## Script Setup
 
 `<script setup>` 是在单文件组件 (SFC) 中使用**组合式 API** 的编译时语法糖。相比于普通的 `<script>` 语法，它具有更多优势：
@@ -91,23 +62,6 @@ The `.prettierrc` configuration is as follows:
 - 更好的 IDE 类型推断性能 (减少语言服务器从代码中抽离类型的工作)。
 
 详细介绍：[https://v3.cn.vuejs.org/api/sfc-script-setup.html](https://v3.cn.vuejs.org/api/sfc-script-setup.html)
-
-```vue
-<script setup lang="ts">
-import { reactive, ref, toRefs } from 'vue'
-
-type Todo = {
-  id: number
-  name: string
-  completed: boolean
-}
-
-const data = reactive({
-  todoList: [] as Todo[]
-})
-const count = ref(0) // 自动解包
-</script>
-```
 
 **defineProps\defineEmits\defineExpose**
 

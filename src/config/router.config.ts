@@ -5,6 +5,22 @@ const createRoute = (component: string) => {
   return modules[`../pages/${component}.vue`]
 }
 
+// 路由菜单的配置
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    redirect: '/hello'
+  }, {
+    name: 'Hello',
+    path: '/hello',
+    component: createRoute('Hello')
+  }, {
+    name: 'ToDoList',
+    path: '/toDoList',
+    component: createRoute('ToDoList')
+  }
+]
+
 class RouterInstance {
   private $routes: Array<RouteRecordRaw> = []
   private $router: Router | null = null
@@ -32,17 +48,5 @@ class RouterInstance {
     return this.$router
   }
 }
-
-// 路由菜单的配置
-const routes: Array<RouteRecordRaw> = [
-  {
-    path: '/',
-    redirect: '/hello'
-  }, {
-    name: 'Hello',
-    path: '/hello',
-    component: createRoute('Hello')
-  }
-]
 
 export default new RouterInstance(routes).createRouter()
