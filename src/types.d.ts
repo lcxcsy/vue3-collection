@@ -1,4 +1,4 @@
-export type Menu = {
+export type MenuItem = {
   title: string
   router: string
   icon: string

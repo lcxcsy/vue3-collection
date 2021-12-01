@@ -5,13 +5,14 @@
 ## Features
 
 - StyleLint
+- SFC (Script Setup)
 - Element-plus
 - Vue-Router@next
 - Axios
 
-## StyleLint
+### StyleLint
 
-Adopting Eslint + Tslint + Prettierrc + Volar, and the required dependencies is:
+Adopting Eslint + Tslint + Prettier + Volar, and the required dependencies is:
 
 - [eslint](https://eslint.org/)
 - [eslint-plugin-vue](https://eslint.vuejs.org/)
@@ -22,37 +23,9 @@ Adopting Eslint + Tslint + Prettierrc + Volar, and the required dependencies is:
 npm install --save-dev eslint eslint-plugin-vue @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
-The `eslintrc.js` configuration is as follows:
+The `eslintrc.js` and `Prettier` configuration can be seen in project.
 
-```js
-module.exports = {
-  root: true,
-  env: {
-    browser: true, // browser global variables
-    es2021: true // adds all ECMAScript 2021 globals and automatically sets the ecmaVersion parser option to 12.
-  },
-  // https://github.com/vuejs/vue-eslint-parser#parseroptionsparser
-  parser: 'vue-eslint-parser',
-  parserOptions: {
-    ecmaVersion: 12,
-    parser: '@typescript-eslint/parser'
-  },
-  plugins: ['@typescript-eslint'],
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
-  rules: {
-    'no-undef': 0,
-    'vue/html-self-closing': 0,
-    'vue/max-attributes-per-line': 0,
-    'vue/singleline-html-element-content-newline': 0
-  }
-}
-```
-
-## Script Setup
+### Script Setup
 
 `<script setup>` 是在单文件组件 (SFC) 中使用**组合式 API** 的编译时语法糖。相比于普通的 `<script>` 语法，它具有更多优势：
 
@@ -89,3 +62,13 @@ const emit = defineEmits<{
 // defineExpose
 </script>
 ```
+
+## Hooks are smarter mixins
+
+Mixins are helpful, no doubt - but they're dumb helpers. Hooks allow us to use smarter imports with explicit logic origin. If you have a file with several mixins, the origin of the data/methods/computed etc that are you now have access to is not immediately obvious. Hooks have us import what we need to use from them, and so we can clearly track our data's origin.
+
+Hooks can also communicate with each other, something that mixins couldn't do.
+
+## Some Question
+
+1. Cannot find module 'worker_threads'
