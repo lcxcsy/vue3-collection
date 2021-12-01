@@ -2,7 +2,16 @@
 
 > A project library based on Vue3, TypeScript and Vite.
 
-## Style Guide
+## Features
+
+- StyleLint
+- Element-plus
+- Vue-Router@next
+- Axios
+
+## StyleLint
+
+Adopting Eslint + Tslint + Prettierrc + Volar, and the required dependencies is:
 
 - [eslint](https://eslint.org/)
 - [eslint-plugin-vue](https://eslint.vuejs.org/)
@@ -13,7 +22,7 @@
 npm install --save-dev eslint eslint-plugin-vue @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```
 
-`eslintrc.js`:
+The `eslintrc.js` configuration is as follows:
 
 ```js
 module.exports = {
@@ -22,9 +31,11 @@ module.exports = {
     browser: true, // browser global variables
     es2021: true // adds all ECMAScript 2021 globals and automatically sets the ecmaVersion parser option to 12.
   },
-  parser: '@typescript-eslint/parser',
+  // https://github.com/vuejs/vue-eslint-parser#parseroptionsparser
+  parser: 'vue-eslint-parser',
   parserOptions: {
-    ecmaVersion: 12
+    ecmaVersion: 12,
+    parser: '@typescript-eslint/parser'
   },
   plugins: ['@typescript-eslint'],
   extends: [
@@ -35,12 +46,13 @@ module.exports = {
   rules: {
     'no-undef': 0,
     'vue/html-self-closing': 0,
-    'vue/max-attributes-per-line': 0
+    'vue/max-attributes-per-line': 0,
+    'vue/singleline-html-element-content-newline': 0
   }
 }
 ```
 
-The default formatter of TS is `prettier` in `[Vetur](https://vuejs.github.io/vetur/)`, and the `.prettierrc` configuration is as follows:
+The `.prettierrc` configuration is as follows:
 
 ```js
 {
@@ -110,7 +122,7 @@ interface Props {
 const props = defineProps<Props>()
 
 // default value of defineProps
-widthDefaults(defineProps<Props>(),{
+withDefaults(defineProps<Props>(),{
   msg: "Hello", labels: () => ['one', 'two']
 })
 

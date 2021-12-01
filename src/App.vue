@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
-const hello = ref(null)
-const handleTest = (str: string): void => {
-  alert(str + `${hello.value.totalCount}`)
-}
+import PageMenu from '@/components/PageMenu.vue'
+import navList from '@/config/nav.config'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld ref="hello" @test="handleTest" />
+  <page-menu :menu="navList" />
+  <div class="router-view">
+    <router-view />
+  </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+.router-view {
+  display: flex;
+  margin-left: 240px;
+  width: calc(100% - 240px);
+  height: 100vh;
+  flex-direction: column;
 }
 </style>
