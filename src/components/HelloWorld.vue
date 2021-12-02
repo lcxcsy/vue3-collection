@@ -1,9 +1,7 @@
 
 <template>
   <div class="hello-wrapper">
-    <h1>
-      {{ msg }}
-    </h1>
+    <h1>Hello Vue 3 + TypeScript + Vite 2</h1>
 
     <p>
       Recommended IDE setup:
@@ -36,9 +34,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-withDefaults(defineProps<{ msg?: string }>(), {
-  msg: 'Hello Vue 3 + TypeScript + Vite'
-})
 const count = ref(0)
 </script>
 

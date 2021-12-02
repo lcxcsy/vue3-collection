@@ -4,7 +4,7 @@ import navList from '@/config/nav.config'
 </script>
 
 <template>
-  <page-menu :menu="navList" />
+  <page-menu ref="pageMenu" :menu="navList" />
   <div class="router-view">
     <router-view />
   </div>

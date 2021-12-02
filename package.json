@@ -11,7 +11,8 @@
     "axios": "^0.24.0",
     "element-plus": "^1.2.0-beta.4",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",

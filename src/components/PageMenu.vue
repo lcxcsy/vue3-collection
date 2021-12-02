@@ -3,17 +3,30 @@
 <template>
   <nav id="page-menu" :style="{ width: isCollapse ? foldWidth : unfoldWidth }">
     <el-scrollbar wrap-style="height: 100%" view-style="height: 100%">
-      <el-menu :default-active="defaultActiveMenu" :router="router" class="el-menu-vertical-demo">
+      <el-menu
+        :default-active="defaultActiveMenu"
+        :router="router"
+        :collapse="isCollapse"
+        :style="{ width: isCollapse ? `${parseInt(foldWidth)}px` : `${parseInt(unfoldWidth)}px` }"
+      >
+        <!-- 折叠按钮 -->
+        <div class="el-sub-menu__title" @click="clickCollapse">
+          <el-icon :size="20">
+            <icon-expand v-if="isCollapse" />
+            <icon-fold v-else />
+          </el-icon>
+        </div>
+        <!-- 真实菜单 -->
         <el-sub-menu index="1">
           <template #title>
             <el-icon :size="20">
               <icon-apple></icon-apple>
             </el-icon>
-            <span>Navigator One</span>
+            <span>{{ defaultActiveMenu }}</span>
           </template>
           <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
+            <el-menu-item index="Hello">item one</el-menu-item>
+            <el-menu-item index="ToDoList">item one</el-menu-item>
           </el-menu-item-group>
           <el-menu-item-group title="Group Two">
             <el-menu-item index="1-3">item three</el-menu-item>
@@ -42,16 +55,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue-demi'
+import { computed } from 'vue'
+import { MenuItem } from '@/types'
 import { useRouter, RouteRecordName } from 'vue-router'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 
-interface MenuItem {
-  title: string
-  router: string
-  icon: string
-}
-
-interface MenuProps {
+type MenuProps = {
   menu: Array<MenuItem> | null
   menuCollapse?: boolean
   // 是否启用折叠按钮
@@ -70,38 +80,33 @@ const props = withDefaults(defineProps<MenuProps>(), {
   menu: null,
   menuCollapse: true,
   collapseBtn: true,
-  foldWidth: '48px',
+  foldWidth: '64px',
   unfoldWidth: '240px',
   router: true
 })
 
-// 获取激活的菜单
-const path = useRouter()
-let defaultActiveMenu = computed((): RouteRecordName | undefined | null => {
-  console.log(path.currentRoute.value.name)
-  let activeMenu = path.currentRoute.value.name
-  return '1'
-})
+/******************* 页面初始化操作 *******************/
 
-// 定义Emit事件
-const emit = defineEmits<{
-  (e: 'click-collapse'): void
-}>()
+/******************* 处理菜单数据 *******************/
 
-let isCollapse = false
-
-const clickCollapse = (): void => {
-  isCollapse = !isCollapse
+/******************* 处理菜单折叠 *******************/
+const store = useStore(key)
+const isCollapse = computed(() => store.state.app?.pageMenu.collapse)
+const emit = defineEmits<{ (e: 'click-collapse'): void }>()
+const clickCollapse = async (): Promise<void> => {
+  store.dispatch('app/toggleMenu')
   emit('click-collapse')
 }
 
-const updateMenu = (): void => {
-  if (props.menu && props.menu.length) {
-    // page.
-    console.log(1)
+/******************* 当前激活菜单 *******************/
+let defaultActiveMenu = computed((): RouteRecordName => {
+  const path = useRouter()
+  if (path.currentRoute.value.name) {
+    return path.currentRoute.value.name
+  } else {
+    return ''
   }
-}
-console.log(props.menu, 'props.menu')
+})
 </script>
 
 <style lang="scss" scoped>
