@@ -1,6 +1,7 @@
 
 <template>
   <div class="hello-wrapper">
+    <img src="https://v3.cn.vuejs.org/logo.png" alt="" />
     <h1>Hello Vue 3 + TypeScript + Vite 2</h1>
 
     <p>

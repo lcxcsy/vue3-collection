@@ -10,14 +10,21 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     redirect: '/hello'
-  }, {
+  },
+  {
     name: 'Hello',
     path: '/hello',
     component: createRoute('Hello')
-  }, {
+  },
+  {
     name: 'ToDoList',
     path: '/toDoList',
     component: createRoute('ToDoList')
+  },
+  {
+    name: 'TablePage',
+    path: '/table',
+    component: createRoute('TablePage')
   }
 ]
 
@@ -39,10 +46,10 @@ class RouterInstance {
     // NavigationGuard
     this.$router.beforeEach(async (to, form, next) => {
       if (to.path.indexOf('error') > -1) {
-        next();
-        return;
+        next()
+        return
       }
-      next();
+      next()
     })
 
     return this.$router

@@ -4,6 +4,7 @@ import { State } from '..'
 // 初始状态
 const initialState = {
   pageMenu: {
+    show: true,
     collapse: false
   }
 }

@@ -6,9 +6,10 @@
 
 - StyleLint
 - SFC (Script Setup)
-- Element-plus
 - Vue-Router@next
+- Vuex@next
 - Axios
+- Element-plus
 
 ### StyleLint
 
@@ -62,6 +63,8 @@ const emit = defineEmits<{
 // defineExpose
 </script>
 ```
+
+## Vuex
 
 ## Hooks are smarter mixins
 

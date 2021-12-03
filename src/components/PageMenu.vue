@@ -17,45 +17,36 @@
           </el-icon>
         </div>
         <!-- 真实菜单 -->
-        <el-sub-menu index="1">
+        <component
+          :is="item.children ? 'el-sub-menu' : 'el-menu-item'"
+          v-for="(item, index) in menu"
+          :key="index"
+          :index="item.router || item.title"
+        >
+          <el-icon v-if="!item.children" :size="20">
+            <component :is="item.icon"></component>
+          </el-icon>
           <template #title>
-            <el-icon :size="20">
-              <icon-apple></icon-apple>
+            <el-icon v-if="item.children" :size="20">
+              <component :is="item.icon"></component>
             </el-icon>
-            <span>{{ defaultActiveMenu }}</span>
+            <span>{{ item.title }}</span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="Hello">item one</el-menu-item>
-            <el-menu-item index="ToDoList">item one</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
-        </el-sub-menu>
-
-        <el-menu-item index="2">
-          <el-icon :size="20"><icon-menu /></el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon :size="20"><icon-document /></el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon :size="20"><icon-setting /></el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
+          <!-- 嵌套的子菜单 -->
+          <el-menu-item v-for="(child, cIndex) in item.children" :key="cIndex" index="toDoList">
+            <el-icon :size="20">
+              <component :is="item.icon"></component>
+            </el-icon>
+            <span>{{ child.title }}</span>
+          </el-menu-item>
+        </component>
       </el-menu>
     </el-scrollbar>
   </nav>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue-demi'
 import { MenuItem } from '@/types'
 import { useRouter, RouteRecordName } from 'vue-router'
 import { useStore } from 'vuex'
@@ -63,9 +54,6 @@ import { key } from '@/store'
 
 type MenuProps = {
   menu: Array<MenuItem> | null
-  menuCollapse?: boolean
-  // 是否启用折叠按钮
-  collapseBtn?: boolean
   // 菜单折叠宽度
   foldWidth?: string
   // 菜单展开宽度
@@ -76,18 +64,12 @@ type MenuProps = {
   router?: boolean
 }
 
-const props = withDefaults(defineProps<MenuProps>(), {
+withDefaults(defineProps<MenuProps>(), {
   menu: null,
-  menuCollapse: true,
-  collapseBtn: true,
   foldWidth: '64px',
   unfoldWidth: '240px',
   router: true
 })
-
-/******************* 页面初始化操作 *******************/
-
-/******************* 处理菜单数据 *******************/
 
 /******************* 处理菜单折叠 *******************/
 const store = useStore(key)
@@ -101,8 +83,8 @@ const clickCollapse = async (): Promise<void> => {
 /******************* 当前激活菜单 *******************/
 let defaultActiveMenu = computed((): RouteRecordName => {
   const path = useRouter()
-  if (path.currentRoute.value.name) {
-    return path.currentRoute.value.name
+  if (path.currentRoute.value.path) {
+    return path.currentRoute.value.path
   } else {
     return ''
   }
@@ -114,8 +96,6 @@ let defaultActiveMenu = computed((): RouteRecordName => {
   position: fixed;
   left: 0;
   height: 100%;
-  // background-color: $--menu-item-fill;
-  // box-shadow: $--menu-box-shadow;
   transition: width 0.2s ease-in-out;
   height: 100%;
   .el-menu {
