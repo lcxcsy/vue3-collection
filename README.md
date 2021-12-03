@@ -1,6 +1,8 @@
-# Vue3-Collection
+# vue3-sfc-ts-template
 
-> A project library based on Vue3, TypeScript and Vite.
+> A personal project template based on vue3, script setup, typescript and vite.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
 
@@ -42,15 +44,15 @@ The `eslintrc.js` and `Prettier` configuration can be seen in project.
 ```ts
 <script setup lang="ts">
 interface Props {
-  msg?: string
+  msg: string
   labels?: string[]
 }
 
 // defineProps
 const props = defineProps<Props>()
 
-// default value of defineProps
-withDefaults(defineProps<Props>(),{
+// or default value of defineProps
+const props = withDefaults(defineProps<Props>(),{
   msg: "Hello", labels: () => ['one', 'two']
 })
 
