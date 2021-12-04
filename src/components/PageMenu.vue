@@ -46,14 +46,14 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue-demi'
-import { MenuItem } from '@/types'
-import { useRouter, RouteRecordName } from 'vue-router'
-import { useStore } from 'vuex'
 import { key } from '@/store'
+import { useStore } from 'vuex'
+import { computed } from 'vue-demi'
+import type { MenuItemType } from '@/types'
+import { useRouter, RouteRecordName } from 'vue-router'
 
 type MenuProps = {
-  menu: Array<MenuItem> | null
+  menu: Array<MenuItemType> | null
   // 菜单折叠宽度
   foldWidth?: string
   // 菜单展开宽度

@@ -1,7 +1,7 @@
-import { MenuItem } from '@/types'
+import { MenuItemType } from '@/types'
 
 // TODO 暂时只支持两层菜单的嵌套
-export const menuList: MenuItem[] = [
+export const menuList: MenuItemType[] = [
   {
     title: '欢迎',
     router: '/hello',
@@ -13,7 +13,7 @@ export const menuList: MenuItem[] = [
     icon: 'icon-menu'
   },
   {
-    title: '通用表单',
+    title: '通用表格',
     router: '/table',
     icon: 'icon-menu'
   },
@@ -33,4 +33,4 @@ export const menuList: MenuItem[] = [
       }
     ]
   }
-] as MenuItem[]
+] as MenuItemType[]

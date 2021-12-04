@@ -61,12 +61,34 @@ const emit = defineEmits<{
   (e: 'change', id: number): void
   (e: 'update', value: string): void
 }>()
-
-// defineExpose
 </script>
 ```
 
 ## Vuex
+
+`vuex` 类型化和模块化:
+
+```ts
+import { InjectionKey } from 'vue'
+import { createStore, Store } from 'vuex'
+import app, { AppState } from './modules/app'
+
+export type State = {
+  user: string
+  app?: AppState
+}
+
+export const key: InjectionKey<Store<State>> = Symbol()
+
+export default createStore({
+  state: {
+    user: 'developer'
+  },
+  modules: {
+    app
+  }
+})
+```
 
 ## Hooks are smarter mixins
 
