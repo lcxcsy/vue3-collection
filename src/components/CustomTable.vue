@@ -105,7 +105,7 @@ const handleDelete = (params: EditDeleteParamType): void => {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .custom-table {
   padding: 0px 24px 56px 24px;
   .header-buttons {

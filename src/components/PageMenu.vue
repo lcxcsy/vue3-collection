@@ -1,5 +1,3 @@
-
-
 <template>
   <nav id="page-menu" :style="{ width: isCollapse ? foldWidth : unfoldWidth }">
     <el-scrollbar wrap-style="height: 100%" view-style="height: 100%">
